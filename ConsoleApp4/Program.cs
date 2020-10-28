@@ -10,10 +10,34 @@ namespace ConsoleApp4
     {
         static void Main(string[] args)
         {
+            List.Info();
+            Console.ReadKey();
         }
+
+    }
+    public static class StaticOperation
+    {
+
     }
     public class List
     {
+        public class Date
+        {
+            private string dateOfCreation;
+
+            public string DateOfCreation
+            {
+                get
+                {
+                    return dateOfCreation;
+                }
+            }
+
+            public Date(string _dateOfCreation)
+            {
+                dateOfCreation = _dateOfCreation;
+            }
+        }
         public class Owner
         {
             public int id { get; set; }
@@ -27,13 +51,21 @@ namespace ConsoleApp4
                 this.organisation = organisation;
             }
         }
-        public Owner owner;
-        public List<int> MyList { get; set;}
-        public List() 
+        public static Owner owner;
+        public static Date date;
+        public static void Info()
         {
-            this.MyList = new List<int>() { 1, 2, 3 };
-            this.owner = new Owner(111,"Dima","BSTU");
+            Console.WriteLine($"Дата создания: {date.DateOfCreation}, Имя владельца: {owner.name},Идентификационный номер: {owner.id},Организация: {owner.organisation}");
         }
 
+        public static List<int> MyList { get; set;}
+        static List() 
+        {
+            MyList = new List<int>() { 1, 2, 3 };
+            owner = new Owner(777,"Daniil","BSTU");
+            date = new Date(DateTime.Now.ToString());
+
+        }
+        
     } 
 }

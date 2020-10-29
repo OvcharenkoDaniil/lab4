@@ -38,6 +38,16 @@ namespace ConsoleApp4
         {
             return list.Count;
         }
+        public static string truncation(this List list)
+        {
+            Console.WriteLine("Введите строку:");
+            string base_string = Console.ReadLine();
+            Console.WriteLine($"Строка: {base_string}");
+            Console.WriteLine("Введите нужную длину усеченной строки:");
+            int n = int.Parse(Console.ReadLine());
+            string new_string = base_string.Substring(0, base_string.Length - n);
+            return new_string;
+        }
     }
     public class List
     {
@@ -98,6 +108,7 @@ namespace ConsoleApp4
             Console.WriteLine($"Количество элементов: {list.count()}");
             Console.WriteLine($"Сумма эементов: {list.Sum()}");
             Console.WriteLine($"разница между максимальным и минимальным элементом: {list.MinOrMax()}");
+            Console.WriteLine($"Усеченная строка: {list.truncation()}");
             Console.ReadKey();
         }
 

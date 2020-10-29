@@ -6,18 +6,38 @@ using System.Threading.Tasks;
 
 namespace ConsoleApp4
 {
-    class Program
+    public static class StatisticOperation
     {
-        static void Main(string[] args)
+        public static int Sum(this List list)
         {
-            List.Info();
-            Console.ReadKey();
+            int sum = 0;
+            for (int i = 0; i < list.Count; i++)
+            {
+                sum += list.MyList[i];
+            }
+            return sum;
         }
-
-    }
-    public static class StaticOperation
-    {
-
+        public static int MinOrMax(this List list)
+        {
+            int min = list.MyList[0];
+            int max = list.MyList[0];
+            for (int i = 0; i < list.Count; i++)
+            {
+                if (list.MyList[i] > max)
+                {
+                    max = list.MyList[i];
+                }
+                if (list.MyList[i] < min)
+                {
+                    min = list.MyList[i];
+                }
+            }
+            return max - min;
+        }
+        public static int count(this List list)
+        {
+            return list.Count;
+        }
     }
     public class List
     {
@@ -58,14 +78,28 @@ namespace ConsoleApp4
             Console.WriteLine($"Дата создания: {date.DateOfCreation}, Имя владельца: {owner.name},Идентификационный номер: {owner.id},Организация: {owner.organisation}");
         }
 
-        public static List<int> MyList { get; set;}
-        static List() 
+        public List<int> MyList { get; set;}
+        public List() 
         {
-            MyList = new List<int>() { 1, 2, 3 };
+            MyList = new List<int>() { 1, 2, 3,4 };
             owner = new Owner(777,"Daniil","BSTU");
             date = new Date(DateTime.Now.ToString());
 
         }
-        
-    } 
+        public int Count => this.MyList.Count;
+    }
+    class Program
+    {
+        static void Main(string[] args)
+        {
+
+            List list = new List();
+            List.Info();
+            Console.WriteLine($"Количество элементов: {list.count()}");
+            Console.WriteLine($"Сумма эементов: {list.Sum()}");
+            Console.WriteLine($"разница между максимальным и минимальным элементом: {list.MinOrMax()}");
+            Console.ReadKey();
+        }
+
+    }
 }
